@@ -74,6 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 20,
                   ),
                   const TextField(
+                    obscureText: true,
                     decoration: InputDecoration(
                         icon: Icon(Icons.lock), hintText: 'Password'),
                   ),

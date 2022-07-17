@@ -1,6 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:login_signup/login/user_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -8,6 +9,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController userController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   String _radioSelected = "Admin";
 
   @override
@@ -59,22 +63,35 @@ class _LoginPageState extends State<LoginPage> {
               padding: const EdgeInsets.all(40),
               child: Column(
                 children: [
-                  const TextField(
-                    decoration: InputDecoration(
+                  TextField(
+                    controller: userController,
+                    decoration: const InputDecoration(
                         icon: Icon(Icons.person), hintText: 'User Name'),
                   ),
                   const SizedBox(
                     height: 30,
                   ),
-                  const TextField(
-                    decoration: InputDecoration(
+                  TextField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
                         icon: Icon(Icons.lock), hintText: 'Password'),
                   ),
                   const SizedBox(
                     height: 50,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // print(
+                      //     passwordController.text + '  ' + userController.text);
+
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UserPage(
+                                userController.text, passwordController.text),
+                          ));
+                    },
                     style: ElevatedButton.styleFrom(primary: Colors.deepPurple),
                     child: const Text('LOG IN'),
                   ),
