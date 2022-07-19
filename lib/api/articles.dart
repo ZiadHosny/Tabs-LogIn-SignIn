@@ -21,46 +21,47 @@ class _ArticlesState extends State<Articles> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: FutureBuilder(
-            future: articles,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                List<Article> articles = snapshot.data as List<Article>;
-
-                return ListView.builder(
-                    itemCount: articles.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  ArticleDetails(article: articles[index]),
-                            ),
-                          );
-                        },
-                        contentPadding: const EdgeInsets.all(20),
-                        leading: Image.network(
-                          articles[index].picture,
-                        ),
-                        title: Text(articles[index].title),
-                      );
-                    });
-              } else if (snapshot.hasError) {
-                return Center(
-                  child: Text(snapshot.error.toString()),
-                );
-              } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-            }),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Api'),
+        backgroundColor: Colors.black,
       ),
+      body: FutureBuilder(
+          future: articles,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              List<Article> articles = snapshot.data as List<Article>;
+
+              return ListView.builder(
+                  itemCount: articles.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ArticleDetails(article: articles[index]),
+                          ),
+                        );
+                      },
+                      contentPadding: const EdgeInsets.all(20),
+                      leading: Image.network(
+                        articles[index].picture,
+                      ),
+                      title: Text(articles[index].title),
+                    );
+                  });
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text(snapshot.error.toString()),
+              );
+            } else {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          }),
     );
   }
 }

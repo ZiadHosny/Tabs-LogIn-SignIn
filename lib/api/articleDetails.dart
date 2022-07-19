@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, must_be_immutable
+// ignore_for_file: use_key_in_widget_constructors, must_be_immutable, file_names
 
 import 'package:flutter/material.dart';
 import 'package:login_signup/api/articleModel.dart';
@@ -19,13 +19,13 @@ class ArticleDetails extends StatelessWidget {
             children: [
               Text(
                 'ID : ${article.id}',
-                style: TextStyle(fontSize: 30),
+                style: const TextStyle(fontSize: 30),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Image.network(article.picture),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Text(
